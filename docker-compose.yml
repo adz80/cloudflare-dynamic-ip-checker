@@ -1,0 +1,23 @@
+services:
+  cf-dyndns-updater:
+    build: .
+    container_name: cf-dyndns-updater
+    environment:
+      # Required variables
+      - CF_ZONE_ID=${CF_ZONE_ID}
+      - CF_BEARER_TOKEN=${CF_BEARER_TOKEN}
+      - CF_RECORD=${CF_RECORD}
+      # Optional variables
+      - INTERVAL=${INTERVAL:-12}
+      - EMAIL=${EMAIL:-nobody@nobody.com}
+      - SMTP_SERVER=${SMTP_SERVER:-localhost}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USERNAME=${SMTP_USERNAME:-default-username}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-}
+      - LOG_FILE=${LOG_FILE:-ipchanges.log}
+      - SEND_EMAIL=${SEND_EMAIL:-False}
+      - LOGGING_LEVEL=${LOGGING_LEVEL:-INFO}
+    # Optional for persistent logging 
+    # volumes:
+    #   - ./logs:/app/logs
+    restart: unless-stopped
