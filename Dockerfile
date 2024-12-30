@@ -5,6 +5,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY dyndns_updater.py .
+COPY cfautoupdater.py .
 
-CMD ["python", "dyndns_updater.py"]
+CMD ["python", "cfautoupdater.py"]
